@@ -11,8 +11,8 @@ export default React.createClass({
         <body>
           <div id="app" dangerouslySetInnerHTML={{__html: this.props.appHtml}}></div>
 
-          <script dangerouslySetInnerHTML={{__html: this.props.state}} />
-          <script dangerouslySetInnerHTML={{__html: this.props.script}} />
+          <script dangerouslySetInnerHTML={{__html: this.props.appState}} />
+          <script dangerouslySetInnerHTML={{__html: this.props.appScript}} />
         </body>
       </html>
     );

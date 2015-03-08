@@ -4,11 +4,11 @@ import path from 'path';
 import Express from 'express';
 import React from 'react';
 
-import App from './app';
+import ClientApp from './app';
 import Layout from './Layout.jsx';
 
 const app = Express();
-const clientScript = fs.readFileSync(path.resolve(__dirname, '../dist/bundle.js'));
+const clientAppScript = fs.readFileSync(path.resolve(__dirname, '../dist/bundle.js'));
 
 const initialState = {
   userList: {
@@ -24,12 +24,21 @@ const initialState = {
 app.set('port', process.env.PORT || 3000);
 
 app.get('*', (req, res) => {
-  const clientApp = new App(initialState);
-  const clientState = clientApp.getState();
 
-  const appHtml = clientApp.renderToString();
-  const appState = 'window.state = \'' + JSON.stringify(clientState) + '\';';
-  const html = React.renderToStaticMarkup(<Layout title='ES6 React' appHtml={appHtml} script={clientScript} state={appState} />);
+  // create app and get state
+  const clientApp = new ClientApp(initialState);
+  const clientAppState = clientApp.getState();
+
+  // render app to html and stringify state
+  const clientHtml = clientApp.renderToString();
+  const clientState = 'window.state = \'' + JSON.stringify(clientAppState) + '\';';
+
+  // render to layout
+  const html = React.renderToStaticMarkup(<Layout
+    title='ES6 React'
+    appHtml={clientHtml}
+    appScript={clientAppScript}
+    appState={clientState} />);
 
   res.send(html);
 });
