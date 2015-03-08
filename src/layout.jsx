@@ -12,7 +12,7 @@ export default React.createClass({
           <div id="app" dangerouslySetInnerHTML={{__html: this.props.appHtml}}></div>
 
           <script dangerouslySetInnerHTML={{__html: this.props.appState}} />
-          <script dangerouslySetInnerHTML={{__html: this.props.appScript}} />
+          <script src="dist/bundle.js" />
         </body>
       </html>
     );

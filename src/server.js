@@ -8,7 +8,6 @@ import ClientApp from './app';
 import Layout from './Layout.jsx';
 
 const app = Express();
-const clientAppScript = fs.readFileSync(path.resolve(__dirname, '../dist/bundle.js'));
 
 const initialState = {
   userList: {
@@ -22,6 +21,7 @@ const initialState = {
 };
 
 app.set('port', process.env.PORT || 3000);
+app.use('/dist', Express.static(path.resolve(__dirname, '../dist')));
 
 app.get('*', (req, res) => {
 
@@ -37,7 +37,6 @@ app.get('*', (req, res) => {
   const html = React.renderToStaticMarkup(<Layout
     title='ES6 React'
     appHtml={clientHtml}
-    appScript={clientAppScript}
     appState={clientState} />);
 
   res.send(html);
