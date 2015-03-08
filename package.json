@@ -1,0 +1,24 @@
+{
+  "name": "es6-react",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "flux": "^2.0.1",
+    "immutable": "^3.6.2",
+    "react": "^0.13.0-rc2"
+  },
+  "devDependencies": {
+    "babel-core": "^4.7.3",
+    "babel-loader": "^4.1.0",
+    "webpack": "^1.7.2"
+  },
+  "scripts": {
+    "watch": "webpack --progress --colors --watch",
+    "build": "webpack",
+    "start": "webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
