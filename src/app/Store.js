@@ -5,8 +5,9 @@ import User from './models/User';
 import {ADD_USER, CHANGE} from './const';
 
 class Store extends EventEmitter {
-  constructor(dispatcher) {
+  constructor(dispatcher, initialState) {
     var _this = this;
+    const state = initialState || Store.defaultState;
 
     dispatcher.register(function(action) {
       if(action.actionType === ADD_USER) {
@@ -17,12 +18,8 @@ class Store extends EventEmitter {
 
     this.state = Map({
       userList: Map({
-        name: 'Employees',
-        users: List.of(
-          new User({ first: 'Such', last: 'Lajcsi' }),
-          new User({ first: 'Much', last: 'Marcsi' }),
-          new User({ first: 'So', last: 'Lujza' })
-        )
+        name: state.userList.name,
+        users: List(state.userList.users.map(user => new User(user)))
       })
     });
   }
@@ -40,5 +37,12 @@ class Store extends EventEmitter {
     return this.state;
   }
 }
+
+Store.defaultState = {
+  userList: {
+    name: 'Employees',
+    users: []
+  }
+};
 
 export default Store;

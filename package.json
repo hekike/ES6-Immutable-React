@@ -4,6 +4,8 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "babel": "^4.7.3",
+    "express": "^4.12.2",
     "flux": "^2.0.1",
     "immutable": "^3.6.2",
     "react": "^0.13.0-rc2"
@@ -16,7 +18,8 @@
   "scripts": {
     "watch": "webpack --progress --colors --watch",
     "build": "webpack",
-    "start": "webpack",
+    "postinstall": "webpack",
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

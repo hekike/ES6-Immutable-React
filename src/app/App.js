@@ -6,18 +6,28 @@ import Store from './Store';
 import Actions from './Actions';
 
 class App {
-  constructor(element) {
+  constructor(state, element) {
     var dispatcher = new Dispatcher();
 
     var actions = new Actions(dispatcher);
-    var store = new Store(dispatcher);
+    this.store = new Store(dispatcher, state);
 
-    var context = {
+    this.context = {
       actions: actions,
-      store: store
+      store: this.store
     };
 
-    React.render(<AppComponent context={context} />, element);
+    if(element) {
+      React.render(<AppComponent context={this.context} />, element);
+    }
+  }
+
+  renderToString() {
+    return React.renderToString(<AppComponent context={this.context} />);
+  }
+
+  getState() {
+    return this.store.state.toJS();
   }
 }
 
