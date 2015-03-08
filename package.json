@@ -1,7 +1,7 @@
 {
   "name": "es6-react",
   "version": "1.0.0",
-  "description": "",
+  "description": "React 0.13 with ES6, Immutable.js and Flux, Isomorphic also",
   "main": "index.js",
   "dependencies": {
     "babel": "^4.7.3",
@@ -22,6 +22,6 @@
     "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC"
+  "author": "Peter Marton",
+  "license": "MIT"
 }

@@ -2,7 +2,8 @@ import App from './app';
 
 var state;
 
-// state from server
+// load state from the server sent state
+// needed for isomorphic state sharing
 try {
   state = JSON.parse(window.state);
 } catch (err) {
