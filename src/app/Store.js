@@ -4,7 +4,16 @@ import {Map, List} from 'immutable';
 import User from './models/User';
 import {ADD_USER, CHANGE} from './const';
 
+/*
+ * @class Store
+ */
 class Store extends EventEmitter {
+
+  /*
+   * @constructs Store
+   * @param {Object} dispatcher
+   * @param {Object} initialState
+   */
   constructor(dispatcher, initialState) {
     var _this = this;
     const state = initialState || Store.defaultState;
@@ -24,6 +33,12 @@ class Store extends EventEmitter {
     });
   }
 
+  /*
+   * Add user
+   *
+   * @method onAddUser
+   * @param {Object} user
+   */
   onAddUser(action) {
     var user = new User({
       first: action.firstName,
@@ -33,6 +48,12 @@ class Store extends EventEmitter {
     this.state = this.state.updateIn(['userList', 'users'], list => list.push(user));
   }
 
+  /*
+   * Get state
+   *
+   * @method getState
+   * @returns {Map} state
+   */
   getState() {
     return this.state;
   }
