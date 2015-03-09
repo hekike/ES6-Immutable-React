@@ -4,10 +4,12 @@ var state;
 
 // load state from the server sent state
 // needed for isomorphic state sharing
-try {
-  state = JSON.parse(window.state);
-} catch (err) {
-  console.error(err);
+if(window.state) {
+  try {
+    state = JSON.parse(window.state);
+  } catch (err) {
+    console.error(err);
+  }
 }
 
 new App(state, document.getElementById('app'));
