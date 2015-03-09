@@ -32,8 +32,7 @@ class Component extends React.Component {
 
 // Validate context types
 Component.contextTypes = {
-  actions: React.PropTypes.object.isRequired,
-  store: React.PropTypes.instanceOf(Store).isRequired
+  actions: React.PropTypes.object.isRequired  
 };
 
 export default Component;

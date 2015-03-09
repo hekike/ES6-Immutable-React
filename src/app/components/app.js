@@ -44,7 +44,11 @@ class App extends React.Component {
    * @returns {Object} childContext
    */
   getChildContext() {
-    return this.props.context;
+
+    // share only actions with childs
+    return {
+      actions: this.props.context.actions
+    };
   }
 
   /*
@@ -52,7 +56,7 @@ class App extends React.Component {
    */
   componentDidMount () {
     var _this = this;
-    var store = _this.getChildContext().store;
+    var store = _this.props.context.store;
 
     // Set new state for store's change event -> re-render component tree
     store.on(CHANGE, function () {
