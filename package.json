@@ -5,9 +5,11 @@
   "main": "index.js",
   "dependencies": {
     "babel": "^4.7.3",
+    "debug": "^2.1.2",
     "express": "^4.12.2",
     "flux": "^2.0.1",
     "immutable": "^3.6.2",
+    "lodash": "^3.5.0",
     "react": "^0.13.0-rc2"
   },
   "devDependencies": {

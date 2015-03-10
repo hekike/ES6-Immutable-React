@@ -19,7 +19,7 @@ class App extends React.Component {
     super(props);
 
     // Set initial state
-    var state = this.props.context.store.getState();
+    var state = this.props.store.getState();
     this.state = {
       userList: state.get('userList')
     };
@@ -47,7 +47,7 @@ class App extends React.Component {
 
     // share only actions with childs
     return {
-      actions: this.props.context.actions
+      actions: this.props.actions
     };
   }
 
@@ -56,7 +56,7 @@ class App extends React.Component {
    */
   componentDidMount () {
     var _this = this;
-    var store = _this.props.context.store;
+    var store = _this.props.store;
 
     // Set new state for store's change event -> re-render component tree
     store.on(CHANGE, function () {
@@ -82,10 +82,8 @@ App.childContextTypes = Component.contextTypes;
 
 // Prop types validation
 App.propTypes = {
-  context: React.PropTypes.shape({
-    actions: React.PropTypes.object.isRequired,
-    store: React.PropTypes.instanceOf(Store).isRequired
-  })
+  actions: React.PropTypes.object.isRequired,
+  store: React.PropTypes.instanceOf(Store).isRequired
 };
 
 export default App;

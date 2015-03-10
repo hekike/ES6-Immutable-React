@@ -2,13 +2,14 @@ import path from 'path';
 
 import Express from 'express';
 import React from 'react';
+import _ from 'lodash';
 
 import ClientApp from './app';
 import Layout from './Layout.jsx';
 
 const app = Express();
 
-const initialState = {
+var initialState = {
   userList: {
     name: 'Employees',
     users: [
@@ -22,23 +23,35 @@ const initialState = {
 app.set('port', process.env.PORT || 3000);
 app.use('/dist', Express.static(path.resolve(__dirname, '../dist')));
 
-app.get('*', (req, res) => {
+app.get('*', (req, res, next) => {
+  const state = _.defaults({
+    path: req.url
+  }, initialState);
 
-  // create app and get state
-  const clientApp = new ClientApp(initialState);
-  const clientAppState = clientApp.getState();
+  // create app
+  const clientApp = new ClientApp(state);
 
-  // render app to html and stringify state
-  const clientHtml = clientApp.renderToString();
-  const clientState = 'window.state = \'' + JSON.stringify(clientAppState) + '\';';
+  // init app
+  clientApp
+    .init()
+    .then(function () {
 
-  // render to layout
-  const html = React.renderToStaticMarkup(<Layout
-    title='ES6 React'
-    appHtml={clientHtml}
-    appState={clientState} />);
+      // get app's state
+      const clientAppState = clientApp.getState().toJS();
 
-  res.send(html);
+      // render app to html and stringify state
+      const clientHtml = clientApp.renderToString();
+      const clientState = 'window.state = \'' + JSON.stringify(clientAppState) + '\';';
+
+      // render to layout
+      const html = React.renderToStaticMarkup(<Layout
+        title='ES6 React'
+        appHtml={clientHtml}
+        appState={clientState} />);
+
+      res.send(html);
+    })
+    .catch(next);
 });
 
 app.listen(app.get('port'), ()=> {
