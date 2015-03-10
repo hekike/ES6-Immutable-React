@@ -21,7 +21,6 @@ class App {
   constructor(state) {
     var dispatcher = new Dispatcher();
 
-    this.initialized = false;
     this.actions = new Actions(dispatcher);
     this.store = new Store(dispatcher, state);
   }
@@ -30,8 +29,6 @@ class App {
    * @method init
    */
   init() {
-    this.initialized = true;
-
     return Promise.all([
       // TODO: fetch initial data, server should wait
       // _this.actions.usersGet()
